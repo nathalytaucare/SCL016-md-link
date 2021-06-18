@@ -1,5 +1,5 @@
 //librerias de node.js
-const mdlinks = require('./index.js');
+const {mdlinks} = require('./index.js');
 const pathLib = require('path')
 //Toma datos de consola
 const path = process.argv[2];
@@ -30,7 +30,7 @@ if (
     options.stats = false;
 }
 
-mdlinks.mdlinks(dirPath,options)
+mdlinks(dirPath,options)
     .then(file => {
         console.log(file);
     })

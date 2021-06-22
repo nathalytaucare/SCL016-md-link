@@ -3,14 +3,11 @@
   "version": "0.1.0",
   "dependencies": {
     "filehound": "^1.17.4",
-    "jsdom": "^16.6.0",
-    "marked": "^2.0.6",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "jest": "^27.0.4"
   },
-  
   
     "scripts": {
       "test": "jest --verbose --coverage"

@@ -22,6 +22,8 @@ const FileOrDirectory = (Path) => {
     });
   });
 };
+
+//leer directorios
 const readDirectorys = (dirPath) => {
   return new Promise((resolve, reject) => {
     const files = fs.readdirSync(dirPath);
@@ -33,8 +35,8 @@ const readDirectorys = (dirPath) => {
       .then((resultado) => {
         return resultado.reduce((acc, val) => acc.concat(val), []);
       })
-      .then((resu) => {
-        resolve(resu.filter((val) => typeof val === "object"));
+      .then((res) => {
+        resolve(res.filter((val) => typeof val === "object"));
       })
       .catch((error) => {
         reject(error);
@@ -43,7 +45,7 @@ const readDirectorys = (dirPath) => {
 
 }
 
-
+// Leer documentos con extension .md
 const readMdFiles = (dirPath) => {
   let ext = path.extname(dirPath).toLowerCase()
   if (ext === '.md') {
@@ -89,7 +91,6 @@ const validateOption = links => {
   //console.log("LINKS:", links);
   return new Promise((resolve, reject) => {
     let statusLinks = links.map(link => {
-      // links.map(link => {
       return fetch(link.href).then(res => {
         if (res.status === 200) {
           link.status = res.status;
@@ -107,7 +108,7 @@ const validateOption = links => {
       .then(res => {
         //console.log("VALIDATE:", links);
         resolve(links);
-       
+
       }).catch(err => {
         links.status = null;
         links.response = "FAIL";
@@ -130,8 +131,8 @@ const statsOption = links => {
   });
 };
 
+//Estadisticas con validación
 const statsValidateOption = (links) => {
-  console.log("links",links);
   return new Promise((resolve, reject) => {
     validateOption(links).then(link => {
       let allLinks = link.map(link => link.href);
@@ -148,14 +149,13 @@ const statsValidateOption = (links) => {
         unique: uniqueLinks.length,
         broken: brokenLinks.length
       }
-      //console.log("STATS RESULT 2:", statsResult);
       if (brokenLinks === 0) {
         statsResult = {
           total: totalLinks,
           unique: uniqueLinks.length,
           broken: 0
         }
-        console.log("statsResult",statsResult);
+        console.log("statsResult", statsResult);
         resolve(statsResult);
       } else {
         brokenLinks = (statusLinks.toString().match(/FAIL/g)).length;
@@ -164,7 +164,7 @@ const statsValidateOption = (links) => {
           unique: uniqueLinks.length,
           broken: brokenLinks
         }
-        console.log("statsResult",statsResult);
+        //console.log("statsResult", statsResult);
         resolve(statsResult);
         //console.log("STATS RESULT:", statsResult);
       }
@@ -210,6 +210,6 @@ const mdlinks = (dirPath, options) => {
   });
 };
 
-module.exports = {mdlinks,FileOrDirectory,fileRead,validateOption,statsOption,statsValidateOption};
+module.exports = { mdlinks, FileOrDirectory, fileRead, validateOption, statsOption, statsValidateOption };
 
 

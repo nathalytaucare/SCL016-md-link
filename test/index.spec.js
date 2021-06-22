@@ -164,9 +164,6 @@ describe("mdLinks", () => {
       )
     );
   });
-  // test('Deria retornar un error al ingresar una ruta invalida', () => {
-  //   return expect(FileOrDirectory(dirPath1)).rejects.toEqual("No es una ruta valida");
-  // });
   it('Error ruta ingresada no valida', () => {
     expect.assertions();
     return expect(FileOrDirectory(dirPath1)).rejects.toThrow("No es una ruta valida");
@@ -188,24 +185,6 @@ describe("mdLinks", () => {
       )
     );
   });
-
-  // it("Deberia retornar la validacion de links", () => {
-  //   expect.assertions(1);
-  //   return statsOption(links).then(res =>
-  //     expect(res).toEqual(
-  //       { total: 5, unique: 3 }
-  //     )
-  //   );
-  // });
-
-  // it("Deberia retornar la estaditica de los links", () => {
-  //   expect.assertions();
-  //   return statsValidateOption(links1).then(res =>
-  //     expect(res).toEqual(
-  //       { total: 1, unique: 1, broken: 0 }
-  //     )
-  //   );
-  // });
 
   it('Error al ingresar en la funcion estadistica y validación', () => {
     expect.assertions();
